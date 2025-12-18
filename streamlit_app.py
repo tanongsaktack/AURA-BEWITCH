@@ -1,7 +1,7 @@
 import streamlit as st
 
 password = st.text_input("รหัสเข้าเว็บ", type="password")
-if password != "1234":  # เปลี่ยน 1234 เป็นรหัสจริง
+if password != "1234":  # เปลี่ยน 1234 เป็นรหัสจริงของมึง
     st.stop()
 
 st.title("เว็บลับของมึง")
@@ -12,5 +12,13 @@ opt3 = st.checkbox("ติ๊ก 3")
 opt4 = st.checkbox("ติ๊ก 4")
 
 if st.button("ประมวลผล"):
-    selected = [f"ติ๊ก {i}" for i in range(1,5) if locals()[f"opt{i}"].value]
-    st.success(f"เลือก: {', '.join(selected) or 'ยังไม่ได้ติ๊ก'}")
+    selected = []
+    if opt1: selected.append("ติ๊ก 1")
+    if opt2: selected.append("ติ๊ก 2")
+    if opt3: selected.append("ติ๊ก 3")
+    if opt4: selected.append("ติ๊ก 4")
+    
+    if selected:
+        st.success(f"มึงติ๊ก: {', '.join(selected)}")
+    else:
+        st.warning("ยังไม่ได้ติ๊กอะไร")
