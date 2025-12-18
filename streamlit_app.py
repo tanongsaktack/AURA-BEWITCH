@@ -1,28 +1,16 @@
 import streamlit as st
 
-# ล็อก password (เปลี่ยน "1234" เป็นรหัสที่มึงอยากใช้)
-password = st.text_input("ใส่รหัสเข้าเว็บ", type="password")
-if password != "1234":
+password = st.text_input("รหัสเข้าเว็บ", type="password")
+if password != "1234":  # เปลี่ยน 1234 เป็นรหัสจริง
     st.stop()
 
 st.title("เว็บลับของมึง")
 
-st.write("Private ติ๊กเลือกข้อมูลแล้วกดประมวลผล")
-
-opt1 = st.checkbox("ตัวเลือก 1")
-opt2 = st.checkbox("ตัวเลือก 2")
-opt3 = st.checkbox("ตัวเลือก 3")
-opt4 = st.checkbox("ตัวเลือก 4")
+opt1 = st.checkbox("ติ๊ก 1")
+opt2 = st.checkbox("ติ๊ก 2")
+opt3 = st.checkbox("ติ๊ก 3")
+opt4 = st.checkbox("ติ๊ก 4")
 
 if st.button("ประมวลผล"):
-    selected = []
-    if opt1: selected.append("ตัวเลือก 1")
-    if opt2: selected.append("ตัวเลือก 2")
-    if opt3: selected.append("ตัวเลือก 3")
-    if opt4: selected.append("ตัวเลือก 4")
-    
-    if selected:
-        st.success(f"มึงติ๊ก: {', '.join(selected)}")
-        # ตรงนี้ใส่สูตรหรือ logic จริงของมึงต่อ
-    else:
-        st.warning("ยังไม่ได้ติ๊กอะไร")
+    selected = [f"ติ๊ก {i}" for i in range(1,5) if locals()[f"opt{i}"].value]
+    st.success(f"เลือก: {', '.join(selected) or 'ยังไม่ได้ติ๊ก'}")
